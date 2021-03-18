@@ -13,12 +13,12 @@ spec:
         - metadata:
             name: elasticsearch-data
           spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 3Gi
-          storageClassName: standard
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 3Gi
+            storageClassName: standard
 ---
 apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
