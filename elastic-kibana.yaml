@@ -4,6 +4,10 @@ metadata:
   name: elastic
 spec:
   version: 7.11.2
+  http:
+    service:
+      spec:
+        type: LoadBalancer
   nodeSets:
     - name: elastic
       count: 3
