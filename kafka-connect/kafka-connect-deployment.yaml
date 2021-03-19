@@ -21,7 +21,7 @@ spec:
             - |
               echo "Installing Connector"
               confluent-hub install --no-prompt mongodb/kafka-connect-mongodb:1.4.0
-              confluent-hub install confluentinc/kafka-connect-elasticsearch:11.0.3
+              confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:11.0.3
               #
               echo "Launching Kafka Connect worker"
               /etc/confluent/docker/run &
