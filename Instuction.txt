@@ -1,2 +1,5 @@
+#Deployment
+kubectl apply -f https://download.elastic.co/downloads/eck/1.4.1/all-in-one.yaml
+
 #GET Password elasticsearch, default username elasticsearch is : elastic
 kubectl get secret elasticsearch-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode; echo

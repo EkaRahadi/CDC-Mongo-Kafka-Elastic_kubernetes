@@ -1,18 +1,17 @@
 {
-    "name":"elasticsearch-sink-connector",
-    "config":{
-       "connector.class":"io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
-       "tasks.max":"1",
-       "topics":"cdc-mongo.smart-survey.users",
-       "key.ignore": "true",
-       "connection.url": "http://:9200",
-       "connection.username": "",
-       "connection.password": "",
-       "type.name": "_doc",
-       "name": "elasticsearch-sink",
-       "key.converter": "io.confluent.connect.avro.AvroConverter",
-       "value.converter": "io.confluent.connect.avro.AvroConverter",
-       "key.converter.schema.registry.url":"http://34.87.99.152:8081",
-       "value.converter.schema.registry.url":"http://34.87.99.152:8081"
-    }
- }
+   "name":"elasticsearch-sink-connector",
+   "config":{
+      "connector.class":"io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+      "tasks.max":"1",
+      "topics":"cdc-mongo.smart-survey.users",
+      "key.ignore": "true",
+      "connection.url": "http://35.240.190.104:9200",
+      "connection.username": "elastic",
+      "connection.password": "w98Jr3Dyl2u4uUm3X8e24lA5",
+      "type.name": "_doc",
+      "key.converter": "io.confluent.connect.avro.AvroConverter",
+      "value.converter": "io.confluent.connect.avro.AvroConverter",
+      "key.converter.schema.registry.url":"http://35.186.146.27:8081",
+      "value.converter.schema.registry.url":"http://35.186.146.27:8081"
+   }
+}
