@@ -2,4 +2,10 @@
 kubectl apply -f https://download.elastic.co/downloads/eck/1.4.1/all-in-one.yaml
 
 #GET Password elasticsearch, default username elasticsearch is : elastic
-kubectl get secret elasticsearch-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode; echo
+kubectl get secret elastic-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode; echo
+
+gcloud compute addresses delete ADDRESS --project PROJECT --region REGION
+
+
+gcloud iam service-accounts keys create project-viewer-credentials.json \
+    --iam-account=59032325140-compute@developer.gserviceaccount.com@universal-survey.iam.gserviceaccount.com
