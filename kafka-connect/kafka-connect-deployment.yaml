@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: kafka-connect
-          image: swarnavac/connect:1.0
+          image: "swarnavac/connect:1.0"
           env:
             - name: CONNECT_BOOTSTRAP_SERVERS
               value: "broker:29092"
