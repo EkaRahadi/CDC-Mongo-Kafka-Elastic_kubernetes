@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: kafka-connect
   labels:
     app: kafka-connect
-  name: kafka-connect
 spec:
   replicas: 1
   selector:
@@ -15,17 +15,50 @@ spec:
         app: kafka-connect
     spec:
       containers:
-        - name: kafka-connect
-          image: "swarnavac/connect:1.0"
+        - args:
+            - bash
+            - -c
+            - |
+              echo "Installing Connector"
+              confluent-hub install --no-prompt mongodb/kafka-connect-mongodb:1.4.0
+              confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:11.0.3
+              confluent-hub install --no-prompt debezium/connect:latest
+              #
+              echo "Launching Kafka Connect worker"
+              /etc/confluent/docker/run &
+              #
+              sleep infinity
           env:
-            - name: CONFIG_STORAGE_TOPIC
-              value: my_connect_configs
-            - name: GROUP_ID
+            - name: CONNECT_BOOTSTRAP_SERVERS
+              value: broker:29092
+            - name: CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR
               value: "1"
-            - name: OFFSET_STORAGE_TOPIC
-              value: my_connect_offsets
-            - name: STATUS_STORAGE_TOPIC
-              value: my_connect_statuses
+            - name: CONNECT_CONFIG_STORAGE_TOPIC
+              value: _connect-configs
+            - name: CONNECT_GROUP_ID
+              value: "kafka-connect"
+            - name: CONNECT_KEY_CONVERTER
+              value: "org.apache.kafka.connect.json.JsonConverter"
+            - name: CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR
+              value: "1"
+            - name: CONNECT_OFFSET_STORAGE_TOPIC
+              value: _connect-offsets
+            - name: CONNECT_PLUGIN_PATH
+              value: /usr/share/java,/usr/share/confluent-hub-components,/data/connect-jars
+            - name: CONNECT_REST_ADVERTISED_HOST_NAME
+              value: kafka-connect
+            - name: CONNECT_REST_PORT
+              value: "8083"
+            - name: CONNECT_STATUS_STORAGE_REPLICATION_FACTOR
+              value: "1"
+            - name: CONNECT_STATUS_STORAGE_TOPIC
+              value: _connect-status
+            - name: CONNECT_VALUE_CONVERTER
+              value: "org.apache.kafka.connect.json.JsonConverter"
+            - name: CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL
+              value: schema-registry:8081
+          image: confluentinc/cp-kafka-connect-base:6.0.1
+          name: kafka-connect
           ports:
             - containerPort: 8083
       restartPolicy: Always
