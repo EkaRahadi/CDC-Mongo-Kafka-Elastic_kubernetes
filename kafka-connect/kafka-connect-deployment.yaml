@@ -15,37 +15,37 @@ spec:
         app: kafka-connect
     spec:
       containers:
-        env:
-          - name: CONNECT_BOOTSTRAP_SERVERS
-            value: "broker:29092"
-          - name: CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR
-            value: "1"
-          - name: CONFIG_STORAGE_TOPIC
-            value: my_connect_configs
-          - name: GROUP_ID
-            value: "1"
-          - name: CONNECT_KEY_CONVERTER
-            value: org.apache.kafka.connect.json.JsonConverter
-          - name: CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR
-            value: "1"
-          - name: OFFSET_STORAGE_TOPIC
-            value: my_connect_offsets
-          - name: CONNECT_PLUGIN_PATH
-            value: "/usr/share/java,/usr/share/confluent-hub-components,/data/connect-jars"
-          - name: CONNECT_REST_ADVERTISED_HOST_NAME
-            value: kafka-connect
-          - name: CONNECT_REST_PORT
-            value: "8083"
-          - name: CONNECT_STATUS_STORAGE_REPLICATION_FACTOR
-            value: "1"
-          - name: STATUS_STORAGE_TOPIC
-            value: my_connect_statuses
-          - name: CONNECT_VALUE_CONVERTER
-            value: org.apache.kafka.connect.json.JsonConverter
-          - name: CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL
-            value: "schema-registry:8081"
-        image: swarnavac/connect
-        name: kafka-connect
-        ports:
-          - containerPort: 8083
+        - name: kafka-connect
+          image: swarnavac/connect
+          env:
+            - name: CONNECT_BOOTSTRAP_SERVERS
+              value: "broker:29092"
+            - name: CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR
+              value: "1"
+            - name: CONFIG_STORAGE_TOPIC
+              value: my_connect_configs
+            - name: GROUP_ID
+              value: "1"
+            - name: CONNECT_KEY_CONVERTER
+              value: org.apache.kafka.connect.json.JsonConverter
+            - name: CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR
+              value: "1"
+            - name: OFFSET_STORAGE_TOPIC
+              value: my_connect_offsets
+            - name: CONNECT_PLUGIN_PATH
+              value: "/usr/share/java,/usr/share/confluent-hub-components,/data/connect-jars"
+            - name: CONNECT_REST_ADVERTISED_HOST_NAME
+              value: kafka-connect
+            - name: CONNECT_REST_PORT
+              value: "8083"
+            - name: CONNECT_STATUS_STORAGE_REPLICATION_FACTOR
+              value: "1"
+            - name: STATUS_STORAGE_TOPIC
+              value: my_connect_statuses
+            - name: CONNECT_VALUE_CONVERTER
+              value: org.apache.kafka.connect.json.JsonConverter
+            - name: CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL
+              value: "schema-registry:8081"
+          ports:
+            - containerPort: 8083
       restartPolicy: Always
